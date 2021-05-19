@@ -5,8 +5,9 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ("id","name","category","count","inCart","cat","get_absolute_url",
-            "description","price","get_image","get_thumbnail"
+        fields = ("id","name","category","count","inCart","cat",
+                 "size","color","get_absolute_url","description",
+                "price","get_image","get_thumbnail"
         )
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -69,7 +70,7 @@ class OrderSerializer(serializers.ModelSerializer):
             "email",
             "address",
             "zipcode",
-            "place",
+            "city",
             "phone",
             "stripe_token",
             "items",

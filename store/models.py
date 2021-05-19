@@ -1,8 +1,25 @@
 from django.db import models
 from django.core.files import File
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from io import BytesIO
 from PIL import Image
+
+PRODUCT_COLORS = (
+('blue', _('blue')),
+('red', _('red')),
+('gray', _('gray')),
+('green', _('green')),
+('white', _('white')),
+)
+
+PRODUCT_SIZES = (
+('xsmall', _('xsmall')),
+('small', _('small')),
+('medium', _('medium')),
+('large', _('large')),
+('xlarge', _('xlarge')),
+)
 
 
 class Category(models.Model):
@@ -24,6 +41,8 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField()
     description = models.TextField(blank=True, null=True)
+    color=models.CharField(max_length=32,choices=PRODUCT_COLORS,default='blue')
+    size=models.CharField(max_length=32,choices=PRODUCT_SIZES,default='medium')
     count = models.IntegerField(default=1)
     inCart = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -80,7 +99,7 @@ class Order(models.Model):
     email = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     zipcode = models.CharField(max_length=100)
-    place = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     paid_amount = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
@@ -101,4 +120,4 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
-        return '%s' % self.order.id
+        return '%s' % self.order.stripe_token

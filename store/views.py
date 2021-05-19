@@ -15,7 +15,8 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from .models import Product, Category,Order
 from .serializers import ProductSerializer, CategorySerializer,OrderSerializer, MyOrderSerializer
 
-# HANDLE PRODUCT LIST
+
+# HANDLE PRODUCT LISTING
 class ProductsListView(APIView):
     permission_classes = (permissions.AllowAny,)
     def get(self, request, format=None):
@@ -23,6 +24,7 @@ class ProductsListView(APIView):
         products = Product.objects.all()[0:4]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
+
 
 # HANDLE PRODUCT DETAIL
 class ProductDetail(APIView):
@@ -38,6 +40,7 @@ class ProductDetail(APIView):
         serializer = ProductSerializer(product)
         return Response(serializer.data)
 
+
 # HANDLE CATEGORY
 class CategoryDetail(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -51,6 +54,7 @@ class CategoryDetail(APIView):
         category = self.get_object(category_slug)
         serializer = CategorySerializer(category)
         return Response(serializer.data)
+
 
 # HANDLE PRODUCT SEARCH
 @api_view(['POST'])
@@ -69,7 +73,8 @@ def SearchView(request):
     else:
         return Response({"products": [], "message":"No match found!"})
 
-# handle payment
+
+# HANDLE CHECKOUT/PAYMENT
 @api_view(['POST'])
 @authentication_classes([authentication.TokenAuthentication])
 @permission_classes([permissions.IsAuthenticated])
@@ -96,6 +101,8 @@ def checkout(request):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+# HANDLE USER ORDER LISTING
 class OrdersList(APIView):
 
     authentication_classes = [authentication.TokenAuthentication]
@@ -106,7 +113,8 @@ class OrdersList(APIView):
         serializer = MyOrderSerializer(orders, many=True)
         return Response(serializer.data)
 
-# handle order removal
+
+# HANDLE SINGLE ORDER REMOVAL
 @api_view(['GET', 'PUT', 'DELETE'])
 @authentication_classes([authentication.TokenAuthentication])
 @permission_classes([permissions.IsAuthenticated])
