@@ -27,7 +27,9 @@ class Category(models.Model):
     slug = models.SlugField()
 
     class Meta:
+        verbose_name_plural = "categories"
         ordering = ('name',)
+
 
     def __str__(self):
         return self.name
@@ -109,7 +111,7 @@ class Order(models.Model):
         ordering = ['-created_at',]
 
     def __str__(self):
-        return self.first_name
+        return f"By {self.first_name} on {self.created_at}"
 
 
 class OrderItem(models.Model):
