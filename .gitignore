@@ -239,6 +239,7 @@ Thumbs.db
 venv
 stuffs
 media
+store/migrations
 db.sqlite3
 .vscode
 __pycache__
