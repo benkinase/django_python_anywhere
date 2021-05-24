@@ -4,6 +4,7 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from django.http import HttpResponse
 import stripe
 
 from django.conf import settings
@@ -15,6 +16,14 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from .models import Product, Category,Order
 from .serializers import ProductSerializer, CategorySerializer,OrderSerializer, MyOrderSerializer
 
+def index(request):
+    return HttpResponse(
+    """
+    <div>
+    <h1>Welcome</h1>
+       <a class="admin" href='/admin/'>GO TO ADMIN</a>
+    </div>
+    """)
 
 # HANDLE PRODUCT LISTING
 class ProductsListView(APIView):
