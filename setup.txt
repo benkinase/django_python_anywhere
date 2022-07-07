@@ -1,0 +1,2 @@
+django  3.2 upgrade => fixing DEFAULT_AUTO_FIELD warnings
+https://dev.to/weplayinternet/upgrading-to-django-3-2-and-fixing-defaultautofield-warnings-518n
