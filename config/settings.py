@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'djoser',
     'store',
     "hotel",
-    'jobhunt',
     "corsheaders"
 ]
 
