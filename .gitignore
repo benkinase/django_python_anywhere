@@ -244,4 +244,5 @@ db.sqlite3
 .vscode
 __pycache__
 requirements.txt
+hosting.md
 # End of https://www.toptal.com/developers/gitignore/api/python,django,vscode

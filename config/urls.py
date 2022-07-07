@@ -10,10 +10,9 @@ from django.contrib.auth import views as auth_views
 
 
 admin.site.site_header = 'Gbenimako Admin'
-admin.site.site_title = 'django-vue-admin'
+admin.site.site_title = 'django-anywhere-admin'
 admin.site.site_url = 'http://gbenimako.com/'
 admin.site.index_title = 'Main Admin Panel'
-#admin.empty_value_display='**Model is empty**'
 from store import views
 
 urlpatterns = [
@@ -24,7 +23,7 @@ urlpatterns = [
     path('reset/done/',auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete',),
     path('', include("hotel.urls")),
     path('', include("store.urls")),
-
+    path('', include("jobhunt.urls")),
     path('api/v1/', include('djoser.urls')),
     path('api/v1/', include('djoser.urls.authtoken')),
     re_path(r'^.*',views.index, name='index' ),
